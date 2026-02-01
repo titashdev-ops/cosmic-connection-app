@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>CosmicConnection - Astrology AI Dating</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --celestial-indigo: #6366f1;
+      --celestial-rose: #f472b6;
+      --celestial-amber: #f59e0b;
+      --bg-deep: #020617;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-deep);
+      color: #f8fafc;
+      overflow-x: hidden;
+      cursor: default;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    .font-serif {
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #020617;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(99, 102, 241, 0.2);
+      border-radius: 10px;
+    }
+
+    .glass {
+      background: rgba(15, 23, 42, 0.4);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+    }
+    
+    .glass-thick {
+      background: rgba(10, 15, 28, 0.85);
+      backdrop-filter: blur(50px);
+      -webkit-backdrop-filter: blur(50px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    
+    .glass-interactive {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .glass-interactive:active {
+      transform: scale(0.98);
+    }
+
+    .celestial-bg {
+      background: radial-gradient(circle at 50% 50%, #0f172a 0%, #020617 100%);
+    }
+
+    /* Shimmer Skeleton Animation */
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+    .skeleton-shimmer {
+      position: relative;
+      overflow: hidden;
+    }
+    .skeleton-shimmer::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+      animation: shimmer 1.5s infinite;
+    }
+
+    .celestial-text {
+      text-shadow: 0 0 12px rgba(99, 102, 241, 0.4), 0 0 24px rgba(99, 102, 241, 0.2);
+    }
+
+    @keyframes float-gentle {
+      0%, 100% { transform: translateY(0) rotate(0); }
+      50% { transform: translateY(-12px) rotate(0.8deg); }
+    }
+    .animate-float-gentle {
+      animation: float-gentle 10s infinite ease-in-out;
+    }
+    
+    @keyframes float-subtle {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+    .animate-float-subtle {
+      animation: float-subtle 8s ease-in-out infinite;
+    }
+
+    @keyframes pulse-celestial {
+      0%, 100% { 
+        box-shadow: 0 0 30px rgba(99, 102, 241, 0.15); 
+        opacity: 0.8;
+      }
+      50% { 
+        box-shadow: 0 0 70px rgba(99, 102, 241, 0.35); 
+        opacity: 1;
+      }
+    }
+    .glow-pulse-celestial {
+      animation: pulse-celestial 6s infinite ease-in-out;
+    }
+
+    @keyframes grain {
+      0%, 100% { transform: translate(0, 0); }
+      10% { transform: translate(-5%, -10%); }
+      30% { transform: translate(-10%, 5%); }
+      50% { transform: translate(5%, 10%); }
+      70% { transform: translate(15%, -5%); }
+      90% { transform: translate(-5%, 5%); }
+    }
+    .noise-overlay {
+      pointer-events: none;
+      position: fixed;
+      top: -100%; left: -100%; width: 300%; height: 300%;
+      background: url('https://grainy-gradients.vercel.app/noise.svg');
+      opacity: 0.08;
+      animation: grain 8s steps(10) infinite;
+      z-index: 999;
+    }
+
+    .view-enter {
+      animation: cinematicScaleUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes cinematicScaleUp {
+      from { opacity: 0; transform: scale(0.95) translateY(30px); filter: blur(10px); }
+      to { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+    }
+
+    .animate-cinematic-pop {
+      animation: cinematicPop 0.6s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+    }
+    @keyframes cinematicPop {
+      from { opacity: 0; transform: scale(0.9) translateY(20px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .stardust-gradient {
+      background: linear-gradient(135deg, #fff 0%, #a5b4fc 25%, #f472b6 50%, #fbbf24 75%, #fff 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: stardust-sweep 8s linear infinite;
+    }
+    @keyframes stardust-sweep {
+      to { background-position: 200% center; }
+    }
+
+    /* Liquid border shimmer */
+    .liquid-border {
+      position: relative;
+    }
+    .liquid-border::after {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      background: linear-gradient(45deg, transparent, rgba(99,102,241,0.3), transparent);
+      z-index: -1;
+      border-radius: inherit;
+      animation: border-shimmer 3s linear infinite;
+    }
+    @keyframes border-shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    .stagger-1 { animation-delay: 100ms; }
+    .stagger-2 { animation-delay: 200ms; }
+    .stagger-3 { animation-delay: 300ms; }
+    .stagger-4 { animation-delay: 400ms; }
+    .stagger-5 { animation-delay: 500ms; }
+
+  </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.4",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.39.0",
+    "lucide-react": "https://esm.sh/lucide-react@^0.563.0",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.13.0"
+  }
+}
+</script>
+</head>
+<body class="celestial-bg">
+  <div class="noise-overlay"></div>
+  <div id="root"></div>
+  <div class="nebula-cloud w-[80vw] h-[80vw] bg-indigo-600 top-[-20%] left-[-20%] opacity-20 blur-[150px] fixed pointer-events-none"></div>
+  <div class="nebula-cloud w-[60vw] h-[60vw] bg-rose-900 top-[40%] right-[-10%] opacity-10 blur-[120px] fixed pointer-events-none" style="animation-delay: -7s"></div>
+</body>
+</html>

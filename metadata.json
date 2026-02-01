@@ -1,0 +1,8 @@
+{
+  "name": "CosmicConnection",
+  "description": "An astrology-backed AI dating experience that bridges the gap between the stars and your soulmate.",
+  "requestFramePermissions": [
+    "microphone",
+    "geolocation"
+  ]
+}
